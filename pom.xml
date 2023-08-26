@@ -11,8 +11,10 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
         <jaxb.version>2.3.0</jaxb.version>
+        <jaxsun.version>2.3.0</jaxsun.version>
+        <jaxb.plugin.version>0.15.3</jaxb.plugin.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
     </properties>
@@ -26,13 +28,20 @@
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-core</artifactId>
-            <version>${jaxb.version}</version>
+            <version>${jaxsun.version}</version>
         </dependency>
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-impl</artifactId>
-            <version>${jaxb.version}</version>
+            <version>${jaxsun.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.jvnet.jaxb2.maven2/maven-jaxb2-plugin -->
+        <dependency>
+            <groupId>org.jvnet.jaxb2.maven2</groupId>
+            <artifactId>maven-jaxb2-plugin</artifactId>
+            <version>${jaxb.plugin.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -40,9 +49,10 @@
             <plugin>
                 <groupId>org.jvnet.jaxb2.maven2</groupId>
                 <artifactId>maven-jaxb2-plugin</artifactId>
-                <version>0.14.0</version>
+                <version>${jaxb.plugin.version}</version>
                 <executions>
                     <execution>
+                        <id>MY-JAXB2</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
@@ -55,7 +65,7 @@
                 <version>3.1.0</version>
                 <executions>
                     <execution>
-                        <id>Auto-Clean</id>
+                        <id>MY-CLEAN</id>
                         <phase>initialize</phase>
                         <goals>
                             <goal>clean</goal>
